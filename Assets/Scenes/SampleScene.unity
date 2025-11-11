@@ -3808,7 +3808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ea53a761771594eb9d41847125f1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  upgradeTemplatePrefab: {fileID: 599614952356616802, guid: 1e4835a1fcbee0a418b0c2c6f7b9aec7, type: 3}
+  upgradeTemplatePrefab: {fileID: 6417590987542763775, guid: 1e4835a1fcbee0a418b0c2c6f7b9aec7, type: 3}
   upgradeList: {fileID: 11400000, guid: 3c5a8e2e5a1f8e548a925c847bdaf33c, type: 2}
 --- !u!1 &855451364
 GameObject:

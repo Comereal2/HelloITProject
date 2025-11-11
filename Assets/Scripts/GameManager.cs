@@ -1,22 +1,25 @@
 using System;
+using System.Numerics;
 using UnityEngine;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
+using Vector3 = UnityEngine.Vector3;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    
     public System.Random rng = new();
-
+    public AudioManager AudioManager;
+    public BigInteger currencyAmount = 10;
+    
     [SerializeField] private GameObject eventSystem;
     [SerializeField] private GameObject playerDealer;
     [SerializeField] private GameplayUI gameplayUI;
     
     private DisplayDialogue dialogueBox;
     private Camera camera;
-    private AudioSource sfxAudioSource;
     
     private void Awake()
     {
@@ -29,7 +32,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         camera = Camera.main;
-        sfxAudioSource = camera?.GetComponentInChildren<AudioSource>();
         
         SlowMove(camera.gameObject, camera.transform.forward * 12f, 2f, true, () =>
         {

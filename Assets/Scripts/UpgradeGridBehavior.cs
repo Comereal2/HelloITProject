@@ -10,10 +10,10 @@ public class UpgradeGridBehavior : MonoBehaviour
     private const int upgradeTemplateWidth = 100;
     private const int upgradeTemplateHeight = 100;
     
-    [SerializeField] private GameObject upgradeTemplatePrefab;
+    [SerializeField] private UpgradeSlotRefs upgradeTemplatePrefab;
     [SerializeField] private UpgradeList upgradeList;
 
-    private List<GameObject> upgradeSlots = new();
+    private List<UpgradeSlotRefs> upgradeSlots = new();
     private List<UpgradeData> upgrades;
     
     private float upgradeRowAmount = 2;
@@ -28,7 +28,7 @@ public class UpgradeGridBehavior : MonoBehaviour
     {
         foreach (var slot in upgradeSlots)
         {
-            Destroy(slot);
+            Destroy(slot.gameObject);
         }
         upgradeSlots.Clear();
         
@@ -37,10 +37,12 @@ public class UpgradeGridBehavior : MonoBehaviour
         {
             for (int j = 0; j < upgradeColAmount; j++)
             {
-                GameObject upgradeSlot = Instantiate(upgradeTemplatePrefab, transform);
+                UpgradeData upgrade = upgrades[GameManager.Instance.rng.Next(upgrades.Count)];
+                UpgradeSlotRefs upgradeSlot = Instantiate(upgradeTemplatePrefab.gameObject, transform).GetComponent<UpgradeSlotRefs>();
                 upgradeSlots.Add(upgradeSlot);
                 upgradeSlot.transform.localScale = new(scale, scale);
                 upgradeSlot.transform.localPosition = new ((j + 0.5f - upgradeColAmount / 2) * upgradeTemplateWidth * scale, (i + 0.5f - upgradeRowAmount / 2) * upgradeTemplateHeight * scale);
+                upgradeSlot.HeldUpgrade = upgrade;
             }
         }
     }
