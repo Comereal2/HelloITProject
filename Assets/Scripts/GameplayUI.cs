@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameplayUI : MonoBehaviour
 {
+    [field: SerializeField] public UpgradeGridBehavior upgradeGrid { get; private set; }
     [field: SerializeField] public DisplayDialogue dialogueMenuParent { get; private set; }
     [SerializeField] private GameObject mainMenuParent;
     [SerializeField] private GameObject shopMenuParent;

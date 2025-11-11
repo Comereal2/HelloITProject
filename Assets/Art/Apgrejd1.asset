@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294408107cda4b24843b5b2312432026, type: 3}
   m_Name: Apgrejd1
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.UpgradeData
+  upgradeName: Upgrade
+  upgradeCost: 10
+  upgradeScale: 0.1
+  upgradeSprite: {fileID: 21300000, guid: d2da1d2d9b3974d448b27114a4722f72, type: 3}

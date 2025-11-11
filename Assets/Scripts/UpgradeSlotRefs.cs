@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UpgradeSlotRefs : MonoBehaviour
 {
-    private string purchaseSfxKey;
+    private string purchaseSfxKey = "Purchase";
     
     [SerializeField] public Image upgradeSprite;
     [SerializeField] public TMP_Text costTextBox;
@@ -19,14 +19,7 @@ public class UpgradeSlotRefs : MonoBehaviour
         set
         {
             _heldUpgrade = value;
-            if (!_heldUpgrade)
-            {
-                upgradeSprite.sprite = null;
-                costTextBox.text = "Restock Required";
-                return;
-            }
-            upgradeSprite.sprite = value.upgradeSprite;
-            costTextBox.text = ((int)value.upgradeCost).ToString();
+            Refresh();
         }
     }
 
@@ -35,6 +28,19 @@ public class UpgradeSlotRefs : MonoBehaviour
         if ((BigInteger)HeldUpgrade.upgradeCost > GameManager.Instance.currencyAmount) return;
         GameManager.Instance.AudioManager.TryPlayAudio(purchaseSfxKey);
         HeldUpgrade.upgradeCost += HeldUpgrade.upgradeScale * HeldUpgrade.upgradeCost;
+        GameManager.Instance.gameplayUI.upgradeGrid.RefreshPrices(HeldUpgrade);
         HeldUpgrade = null;
+    }
+
+    public void Refresh()
+    {
+        if (!HeldUpgrade)
+        {
+            upgradeSprite.sprite = null;
+            costTextBox.text = "Restock Required";
+            return;
+        }
+        upgradeSprite.sprite = HeldUpgrade.upgradeSprite;
+        costTextBox.text = ((int)HeldUpgrade.upgradeCost).ToString();
     }
 }

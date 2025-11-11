@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private GameObject eventSystem;
     [SerializeField] private GameObject playerDealer;
-    [SerializeField] private GameplayUI gameplayUI;
+    [field: SerializeField] public GameplayUI gameplayUI { get; private set; }
     
     private DisplayDialogue dialogueBox;
     private Camera camera;
@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         dialogueBox = gameplayUI.dialogueMenuParent;
-        gameplayUI.UnloadAllMenus();
-        DisablePlayerInput();
     }
 
     private void Start()
     {
         camera = Camera.main;
+        gameplayUI.UnloadAllMenus();
+        DisablePlayerInput();
         
         SlowMove(camera.gameObject, camera.transform.forward * 12f, 2f, true, () =>
         {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using ScriptableObjects;
 
@@ -14,14 +15,19 @@ public class UpgradeGridBehavior : MonoBehaviour
     [SerializeField] private UpgradeList upgradeList;
 
     private List<UpgradeSlotRefs> upgradeSlots = new();
-    private List<UpgradeData> upgrades;
+    private List<UpgradeData> upgrades = new();
     
     private float upgradeRowAmount = 2;
     private float upgradeColAmount = 2;
 
     private void Awake()
     {
-        upgrades = new(upgradeList.upgrades);
+        foreach (var u in upgradeList.upgrades)
+        {
+            var upgrade = ScriptableObject.CreateInstance<UpgradeData>();
+            upgrade.LoadValues(u);
+            upgrades.Add(upgrade);
+        }
     }
 
     public void Redraw()
@@ -44,6 +50,14 @@ public class UpgradeGridBehavior : MonoBehaviour
                 upgradeSlot.transform.localPosition = new ((j + 0.5f - upgradeColAmount / 2) * upgradeTemplateWidth * scale, (i + 0.5f - upgradeRowAmount / 2) * upgradeTemplateHeight * scale);
                 upgradeSlot.HeldUpgrade = upgrade;
             }
+        }
+    }
+
+    public void RefreshPrices(UpgradeData upgrade)
+    {
+        foreach (var slot in upgradeSlots.Where(slot => slot.HeldUpgrade == upgrade))
+        {
+            slot.Refresh();
         }
     }
 }

@@ -2621,6 +2621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 558797597}
   - component: {fileID: 558797596}
+  - component: {fileID: 558797598}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2640,9 +2641,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce537eb7e08493e409ef792a1102a9d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  AudioManager: {fileID: 558797598}
   eventSystem: {fileID: 260665881}
   playerDealer: {fileID: 4200639335070772103}
-  gameplayUI: {fileID: 830679546}
+  <gameplayUI>k__BackingField: {fileID: 830679546}
 --- !u!4 &558797597
 Transform:
   m_ObjectHideFlags: 0
@@ -2658,6 +2660,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558797598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558797595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332c23c52621408f8bfe96f8bdc947e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  audioSource: {fileID: 1937730168}
+  _audioClips:
+  - key: Purchase
+    clip: {fileID: 8300000, guid: fdaefac953e99954986240558b17116d, type: 3}
 --- !u!1 &578409242
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,6 +3726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f72d23bf1b04136b41f16c95d1da1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayUI
+  <upgradeGrid>k__BackingField: {fileID: 851477493}
   <dialogueMenuParent>k__BackingField: {fileID: 1664512404}
   mainMenuParent: {fileID: 202320687}
   shopMenuParent: {fileID: 1500141308}
@@ -8370,7 +8389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4200639335070772103}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.14678934, y: 0.6917029, z: 0.14678934, w: 0.6917029}
   m_LocalPosition: {x: -2, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
