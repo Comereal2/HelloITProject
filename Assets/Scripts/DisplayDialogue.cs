@@ -15,6 +15,7 @@ public class DisplayDialogue : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.SetActive(false);
         originalBgColor = background.color;
         originalTextColor = dialogueTextBox.color;
     }

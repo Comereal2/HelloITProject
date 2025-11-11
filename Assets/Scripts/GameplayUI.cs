@@ -1,0 +1,26 @@
+﻿using UnityEngine;
+
+public class GameplayUI : MonoBehaviour
+{
+    [field: SerializeField] public DisplayDialogue dialogueMenuParent { get; private set; }
+    [SerializeField] private GameObject mainMenuParent;
+    [SerializeField] private GameObject shopMenuParent;
+
+    public void UnloadAllMenus()
+    {
+        mainMenuParent.SetActive(false);
+        shopMenuParent.SetActive(false);
+    }
+    
+    public void LoadMainMenu()
+    {
+        UnloadAllMenus();
+        mainMenuParent.SetActive(true);
+    }
+
+    public void LoadShop()
+    {
+        UnloadAllMenus();
+        shopMenuParent.SetActive(true);
+    }
+}
