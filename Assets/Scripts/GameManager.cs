@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public System.Random rng = new();
+
     [SerializeField] private GameObject eventSystem;
     [SerializeField] private GameObject playerDealer;
     [SerializeField] private GameplayUI gameplayUI;
