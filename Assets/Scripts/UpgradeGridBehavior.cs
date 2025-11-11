@@ -43,21 +43,35 @@ public class UpgradeGridBehavior : MonoBehaviour
         {
             for (int j = 0; j < upgradeColAmount; j++)
             {
-                UpgradeData upgrade = upgrades[GameManager.Instance.rng.Next(upgrades.Count)];
                 UpgradeSlotRefs upgradeSlot = Instantiate(upgradeTemplatePrefab.gameObject, transform).GetComponent<UpgradeSlotRefs>();
                 upgradeSlots.Add(upgradeSlot);
                 upgradeSlot.transform.localScale = new(scale, scale);
                 upgradeSlot.transform.localPosition = new ((j + 0.5f - upgradeColAmount / 2) * upgradeTemplateWidth * scale, (i + 0.5f - upgradeRowAmount / 2) * upgradeTemplateHeight * scale);
-                upgradeSlot.HeldUpgrade = upgrade;
+                RollSlot(upgradeSlot);
             }
         }
     }
 
+    public void RefreshAllSlotsWithCost(int cost)
+    {
+        if (cost > GameManager.Instance.CurrencyAmount) return;
+        GameManager.Instance.CurrencyAmount -= cost;
+        foreach (var slot in upgradeSlots)
+        {
+            RollSlot(slot);
+        }
+    }
+    
     public void RefreshPrices(UpgradeData upgrade)
     {
         foreach (var slot in upgradeSlots.Where(slot => slot.HeldUpgrade == upgrade))
         {
             slot.Refresh();
         }
+    }
+
+    public void RollSlot(UpgradeSlotRefs slot)
+    {
+        slot.HeldUpgrade = upgrades[GameManager.Instance.rng.Next(upgrades.Count)];
     }
 }

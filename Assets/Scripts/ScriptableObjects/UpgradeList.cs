@@ -8,12 +8,5 @@ namespace ScriptableObjects
     public class UpgradeList : ScriptableObject
     {
         [SerializeField] public List<UpgradeData> upgrades;
-
-        #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            upgrades = upgrades.ToHashSet().ToList();
-        }
-        #endif
     }
 }

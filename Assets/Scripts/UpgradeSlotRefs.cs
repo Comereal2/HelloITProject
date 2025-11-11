@@ -25,11 +25,16 @@ public class UpgradeSlotRefs : MonoBehaviour
 
     public void Purchase()
     {
-        if ((BigInteger)HeldUpgrade.upgradeCost > GameManager.Instance.currencyAmount) return;
+        if ((BigInteger)HeldUpgrade.upgradeCost > GameManager.Instance.CurrencyAmount) return;
         GameManager.Instance.AudioManager.TryPlayAudio(purchaseSfxKey);
         HeldUpgrade.upgradeCost += HeldUpgrade.upgradeScale * HeldUpgrade.upgradeCost;
         GameManager.Instance.gameplayUI.upgradeGrid.RefreshPrices(HeldUpgrade);
-        HeldUpgrade = null;
+        GameManager.Instance.gameplayUI.upgradeGrid.RollSlot(this);
+
+        foreach (var upgrade in HeldUpgrade.upgrades)
+        {
+            GameManager.Instance.ModifyStat(upgrade);
+        }
     }
 
     public void Refresh()

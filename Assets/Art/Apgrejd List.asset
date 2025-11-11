@@ -14,3 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.UpgradeList
   upgrades:
   - {fileID: 11400000, guid: f4c0913856217eb4c805c8ced3fcd693, type: 2}
+  - {fileID: 11400000, guid: 759af4a1e7193a041a1b2fcbd417fa1a, type: 2}
+  - {fileID: 11400000, guid: 00332e18f7f2671438c4192c0df08f9b, type: 2}
+  - {fileID: 11400000, guid: 4802177f2308148488534245ead13afd, type: 2}
+  - {fileID: 11400000, guid: b4c4ab62aa9123642be3ca3fab2caa66, type: 2}
+  - {fileID: 11400000, guid: c23817a204c43f648a5e4e62004058a2, type: 2}
+  - {fileID: 11400000, guid: 8a4ad6b52137a7e4a8cd94366a8fd765, type: 2}
+  - {fileID: 11400000, guid: aa6b5c73e4887a24dabeef2bc2c787b7, type: 2}
+  - {fileID: 11400000, guid: 76abcaf569f03e2439b3c584ee31f5cc, type: 2}
+  - {fileID: 11400000, guid: f079ffa9ba064ef4bb43bb52d67ca305, type: 2}
