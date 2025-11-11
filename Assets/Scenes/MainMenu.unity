@@ -513,6 +513,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3139286354000115236, guid: b92b90e5f7d74494d84c2971cbd76ea2, type: 3}
+      propertyPath: m_text
+      value: '<size=120>Lets Go Gambling!</size>
+
+        (PS. This game is a joke
+        and made badly on purpose :P)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139286354000115236, guid: b92b90e5f7d74494d84c2971cbd76ea2, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
       objectReference: {fileID: 0}

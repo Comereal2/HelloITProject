@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] private GameObject eventSystem;
     [SerializeField] private GameObject playerDealer;
     [SerializeField] private GameplayUI gameplayUI;
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         dialogueBox = gameplayUI.dialogueMenuParent;
         gameplayUI.UnloadAllMenus();
+        DisablePlayerInput();
     }
 
     private void Start()
@@ -26,27 +28,35 @@ public class GameManager : MonoBehaviour
         camera = Camera.main;
         sfxAudioSource = camera?.GetComponentInChildren<AudioSource>();
         
-        SlowMove(camera.gameObject, camera.transform.forward * 4f, 3f, true, () =>
+        SlowMove(camera.gameObject, camera.transform.forward * 12f, 2f, true, () =>
         {
             gameplayUI.gameObject.SetActive(true);
             dialogueBox.DisplayText("Hey, dev here. We uhhh kinda ran out of budget for a 3d game because of these fancy AAA assets, so let me just...", 15, 0,
-                () =>
-                {
-                    playerDealer.transform.LookAt(camera.transform);
-                    SlowMove(playerDealer, Vector3.Lerp(playerDealer.transform.position, camera.transform.position, 0.7f), 2f, false, 
-                        () => SlowStretch(playerDealer, new Vector3(2.3f, 1, 1), 1f, true, 
-                            () => dialogueBox.DisplayText("L O A D I M ", 2, 0, 
-                                () =>
-                                {
-                                    dialogueBox.DisplayText("L O A D I N G", 2, 9);
-                                    gameplayUI.LoadMainMenu();
-})));});});}
+                () => {
+            playerDealer.transform.LookAt(camera.transform);
+            SlowMove(playerDealer, Vector3.Lerp(playerDealer.transform.position, camera.transform.position, 0.7f), 2f, false, 
+        () => SlowStretch(playerDealer, new Vector3(2.3f, 1, 1), 1f, true,
+    () => dialogueBox.DisplayText("L O A D I M ", 2, 0, 
+() => {
+                                                                        dialogueBox.DisplayText("L O A D I N G", 2, 9,
+() => dialogueBox.DisplayText("Now THIS is professional UI. Uhhhh, I guess I should give you a tutorial... Up on the top you got the pause menu, to the right you got the shop, rest is the roulette and you can probably figure everything out. Your smart rihgt?", 15, 0, EnablePlayerInput));
+                                    gameplayUI.LoadMainMenu();})));});});}
 
     private void OnDestroy()
     {
         Instance = null;
     }
+    
+    public void DisablePlayerInput()
+    {
+        eventSystem.SetActive(false);
+    }
 
+    public void EnablePlayerInput()
+    {
+        eventSystem.SetActive(true);
+    }
+    
     public static async void SlowMove(GameObject obj, Vector3 newPos, float time, bool setToRelativePos = false, [CanBeNull] Action invokeOnEnd = null)
     {
         Vector3 startPos = obj.transform.position;

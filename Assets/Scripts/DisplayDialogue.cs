@@ -13,6 +13,8 @@ public class DisplayDialogue : MonoBehaviour
     private Color originalBgColor;
     private Color originalTextColor;
 
+    private bool isPlayingDialogue = false;
+
     private void Awake()
     {
         gameObject.SetActive(false);
@@ -22,6 +24,7 @@ public class DisplayDialogue : MonoBehaviour
 
     public async void DisplayText(string text, int charactersPerSecond, int startCharacterIndex = 0, [CanBeNull] Action endDialogueAction = null)
     {
+        isPlayingDialogue = true;
         gameObject.SetActive(true);
         background.color = originalBgColor;
         dialogueTextBox.color = originalTextColor;
@@ -34,6 +37,8 @@ public class DisplayDialogue : MonoBehaviour
             dialogueTextBox.maxVisibleCharacters += 1;
             await Task.Delay(interval);
         }
+
+        isPlayingDialogue = false;
         FadeOutDisplay(1);
         endDialogueAction?.Invoke();
     }
@@ -46,7 +51,7 @@ public class DisplayDialogue : MonoBehaviour
 
         while (elapsedTime < time)
         {
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying || isPlayingDialogue) return;
             float t = elapsedTime / time;
             bgColor.a = Mathf.Lerp(originalBgColor.a, 0, t);
             textColor.a = Mathf.Lerp(originalTextColor.a, 0, t);
