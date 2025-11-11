@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     private DisplayDialogue dialogueBox;
     private Camera camera;
+    private AudioSource sfxAudioSource;
     
     private void Awake()
     {
@@ -23,35 +24,27 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         camera = Camera.main;
-    }
+        sfxAudioSource = camera?.GetComponentInChildren<AudioSource>();
+        
+        SlowMove(camera.gameObject, camera.transform.forward * 4f, 3f, true, () =>
+        {
+            gameplayUI.gameObject.SetActive(true);
+            dialogueBox.DisplayText("Hey, dev here. We uhhh kinda ran out of budget for a 3d game because of these fancy AAA assets, so let me just...", 15, 0,
+                () =>
+                {
+                    playerDealer.transform.LookAt(camera.transform);
+                    SlowMove(playerDealer, Vector3.Lerp(playerDealer.transform.position, camera.transform.position, 0.7f), 2f, false, 
+                        () => SlowStretch(playerDealer, new Vector3(2.3f, 1, 1), 1f, true, 
+                            () => dialogueBox.DisplayText("L O A D I M ", 2, 0, 
+                                () =>
+                                {
+                                    dialogueBox.DisplayText("L O A D I N G", 2, 9);
+                                    gameplayUI.LoadMainMenu();
+})));});});}
 
     private void OnDestroy()
     {
         Instance = null;
-    }
-
-    public void SnapToGame()
-    {
-        gameplayUI.gameObject.SetActive(true);
-        dialogueBox.DisplayText("Hey, dev here. We uhhh kinda ran out of budget for a 3d game because of these fancy AAA assets, so let me just...", 15, 0, MoveDealerToCam);
-    }
-
-    private void MoveDealerToCam()
-    {
-        playerDealer.transform.LookAt(camera.transform);
-        SlowMove(playerDealer, Vector3.Lerp(playerDealer.transform.position, camera.transform.position, 0.7f), 2f, false, 
-            () => SlowStretch(playerDealer, new Vector3(2.3f, 1, 1), 1f, true, 
-            () => dialogueBox.DisplayText("L O A D I M ", 2, 0, 
-                () =>
-                {
-                    dialogueBox.DisplayText("L O A D I N G", 2, 9);
-                    LoadGame();
-                })));
-    }
-
-    private void LoadGame()
-    {
-        gameplayUI.LoadMainMenu();
     }
 
     public static async void SlowMove(GameObject obj, Vector3 newPos, float time, bool setToRelativePos = false, [CanBeNull] Action invokeOnEnd = null)
